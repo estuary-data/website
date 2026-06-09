@@ -10,12 +10,12 @@
 }
 
 :root {
-  --teal:       #1B6B6B;
-  --teal-dark:  #145555;
-  --slate:      #2D4A6B;
-  --bg:         #F8F9FA;
-  --bg-alt:     #EEF2F5;
-  --text:       #1A1A2E;
+  --teal:       #2E80BF;
+  --teal-dark:  #1B3D6E;
+  --slate:      #1B3D6E;
+  --bg:         #F5F8FC;
+  --bg-alt:     #EAF0F8;
+  --text:       #111E2E;
   --text-muted: #5A6070;
   --white:      #FFFFFF;
   --border:     #D8DDE6;
@@ -216,7 +216,7 @@ p + p { margin-top: 1em; }
    ============================================================ */
 .hero {
   padding: 80px 24px 72px;
-  background: linear-gradient(135deg, #F0F6F6 0%, #F8F9FA 60%, #F0F4F8 100%);
+  background: linear-gradient(135deg, #E8F2FA 0%, #F5F8FC 60%, #EBF0F8 100%);
 }
 
 .hero-inner {
