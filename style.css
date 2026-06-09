@@ -10,9 +10,14 @@
 }
 
 :root {
-  --teal:       #2E80BF;
-  --teal-dark:  #1B3D6E;
-  --slate:      #1B3D6E;
+  --navy:       #0C5380;  /* brand navy — "Estuary" / structural (from vector source) */
+  --navy-dark:  #09405F;  /* hover/pressed */
+  --cyan:       #0CADD6;  /* brand cyan — "Data" / accent spark (from vector source) */
+  --cyan-dark:  #0B97BC;
+  /* legacy aliases so existing rules map to navy by default */
+  --teal:       var(--navy);
+  --teal-dark:  var(--navy-dark);
+  --slate:      #0C5380;
   --bg:         #F5F8FC;
   --bg-alt:     #EAF0F8;
   --text:       #111E2E;
@@ -48,7 +53,7 @@ a {
   text-decoration: none;
 }
 
-a:hover { text-decoration: underline; }
+a:hover { color: var(--cyan-dark); text-decoration: underline; }
 
 h1, h2, h3 {
   line-height: 1.2;
@@ -137,24 +142,15 @@ p + p { margin-top: 1em; }
 .logo {
   display: flex;
   align-items: center;
-  gap: 8px;
   text-decoration: none;
-  color: var(--text);
 }
 
 .logo:hover { text-decoration: none; }
 
-.logo-mark {
-  font-size: 1.6rem;
-  color: var(--teal);
-  font-weight: 700;
-  line-height: 1;
-}
-
-.logo-text {
-  font-size: 1.1rem;
-  font-weight: 700;
-  letter-spacing: -0.01em;
+.logo-img {
+  height: 38px;
+  width: auto;
+  display: block;
 }
 
 /* Nav */
@@ -173,8 +169,13 @@ p + p { margin-top: 1em; }
 }
 
 .site-nav a:not(.btn):hover {
-  color: var(--teal);
+  color: var(--cyan-dark);
   text-decoration: none;
+}
+
+/* keep the CTA button text white (base .site-nav a color would otherwise win) */
+.site-nav a.btn-primary {
+  color: var(--white);
 }
 
 /* Hamburger */
@@ -266,22 +267,21 @@ p + p { margin-top: 1em; }
 }
 
 .flow-node--center {
-  background: var(--teal);
-  border-color: var(--teal);
-  padding: 18px 22px;
-  border-radius: 50%;
+  background: var(--white);
+  border-color: var(--border);
+  padding: 10px 14px;
+  border-radius: 12px;
 }
 
-.flow-logo-mark {
-  font-size: 1.6rem;
-  color: var(--white);
-  font-weight: 700;
-  line-height: 1;
+.flow-logo-img {
+  height: 36px;
+  width: auto;
+  display: block;
 }
 
 .flow-arrow {
   font-size: 1.2rem;
-  color: var(--teal);
+  color: var(--cyan);
   font-weight: 700;
 }
 
@@ -312,7 +312,7 @@ p + p { margin-top: 1em; }
 }
 
 .service-icon {
-  color: var(--teal);
+  color: var(--cyan);
   margin-bottom: 20px;
 }
 
@@ -330,9 +330,33 @@ p + p { margin-top: 1em; }
    Who We Serve
    ============================================================ */
 .who-we-serve {
-  padding: var(--section-pad);
-  background: var(--teal);
+  position: relative;
+  padding: 104px 24px;
+  background: linear-gradient(125deg, var(--navy) 0%, var(--navy) 55%, #0C6E96 100%);
   color: var(--white);
+}
+
+/* estuary "water's edge" — wavy top and bottom boundaries on the band */
+.who-we-serve::before,
+.who-we-serve::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 46px;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  pointer-events: none;
+}
+
+.who-we-serve::before {
+  top: -1px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 46' preserveAspectRatio='none'%3E%3Cpath fill='%23FFFFFF' d='M0 0H1440V18C1200 42 960 6 720 20S300 46 0 24Z'/%3E%3C/svg%3E");
+}
+
+.who-we-serve::after {
+  bottom: -1px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 46' preserveAspectRatio='none'%3E%3Cpath fill='%23F5F8FC' d='M0 46H1440V28C1200 4 960 40 720 26S300 0 0 22Z'/%3E%3C/svg%3E");
 }
 
 .who-inner {
@@ -462,7 +486,7 @@ p + p { margin-top: 1em; }
   background: var(--bg);
   border-radius: 16px;
   padding: 52px 56px;
-  border-left: 5px solid var(--teal);
+  border-left: 5px solid var(--cyan);
 }
 
 .case-study-label {
@@ -594,8 +618,9 @@ p + p { margin-top: 1em; }
    Footer
    ============================================================ */
 .site-footer {
-  background: var(--text);
-  color: rgba(255,255,255,0.75);
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+  color: var(--text-muted);
   padding: 48px 24px;
 }
 
@@ -607,13 +632,17 @@ p + p { margin-top: 1em; }
   text-align: center;
 }
 
-.logo--footer .logo-text { color: var(--white); }
+.logo--footer {
+  justify-content: center;
+}
 
-.logo--footer .logo-mark { color: rgba(255,255,255,0.9); }
+.logo--footer .logo-img {
+  height: 32px;
+}
 
 .footer-tagline {
   font-size: 0.9rem;
-  color: rgba(255,255,255,0.6);
+  color: var(--text-muted);
   margin-top: 4px;
 }
 
@@ -624,15 +653,16 @@ p + p { margin-top: 1em; }
 
 .footer-links a {
   font-size: 0.9rem;
-  color: rgba(255,255,255,0.75);
+  color: var(--text-muted);
   transition: color 0.15s;
 }
 
-.footer-links a:hover { color: var(--white); text-decoration: none; }
+.footer-links a:hover { color: var(--cyan-dark); text-decoration: none; }
 
 .footer-copy {
   font-size: 0.8rem;
-  color: rgba(255,255,255,0.4);
+  color: var(--text-muted);
+  opacity: 0.6;
 }
 
 
